@@ -29,7 +29,7 @@ const useStyles2 = makeStyles((theme) => ({
     div:{
         height:'-moz-calc(100% - 150px)',
         height:'-webkit-calc(100% - 150px)',
-        height:'calc(100% - 150px)',
+        height:'calc(100% - 170px)',
         overflowY:'scroll',
     }
   }));
@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     [theme.breakpoints.up('sm')]: {
-      width: `calc(100% - ${drawerWidth}px)`,
+      width: `calc(100% - ${0}px)`,
       marginLeft: drawerWidth,
     },
   },
@@ -64,6 +64,7 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
+    paddingBottom:theme.spacing(0)
   },
 }));
 
@@ -138,7 +139,7 @@ function Planner(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Responsive drawer
+            Administrador de tareas
           </Typography>
         </Toolbar>
       </AppBar>
@@ -181,7 +182,7 @@ function Planner(props) {
                 description={data.description}
                 date={data.dueDate}/>)}
                 </div>
-            <div style={{width:'100%',height:'20px',textAlign:'right'}}>
+            <div style={{width:'100%',height:'70px',textAlign:'right'}}>
             <Fab color="secondary" aria-label="add">
                 <AddIcon />
             </Fab>

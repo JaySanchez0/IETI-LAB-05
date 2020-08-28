@@ -1,5 +1,7 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -7,7 +9,13 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import AddIcon from '@material-ui/icons/Add';
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme)=>({
+ card:{
+    width:'100%',
+    [theme.breakpoints.up('sm')]:{
+        width:'400px',
+    }
+ },
   root: {
     minWidth: 275,
   },
@@ -22,15 +30,16 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
-});
+}));
 
 export default function CardItem(props) {
-  const classes = useStyles();
+  const theme = useTheme();
+  const classes = useStyles(theme);
   const bull = <span className={classes.bullet}>•</span>;
   console.log(props);
   return (
       <React.Fragment>
-    <Card style={{width:'400px'}}>
+    <Card className={classes.card}>
       <CardContent>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
           {props.status=='ready' && <CheckCircleOutlineIcon style={{color:'green'}}></CheckCircleOutlineIcon>}
@@ -50,7 +59,7 @@ export default function CardItem(props) {
         <Button size="small">Learn More</Button>
       </CardActions>
     </Card>
-    <div style={{width:'100%',height:'20px'}}></div>
+    <div style={{width:'100%',height:'40px'}}></div>
     </React.Fragment>
   );
 }
