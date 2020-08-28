@@ -27,7 +27,7 @@ export default function Login(props){
         <Button color="secondary" size="small" onClick={()=>setCorrect(true)}><CloseIcon style={{background:'white'}}></CloseIcon></Button>
     );
     return (<div id="login" style={{width:'100%',height:'100hv',background:'orange',display:'flex',alignItems:'center',justifyContent:'center'}}>
-        <div style={{width:'600px',height:'450px',background:'white',display:'block',borderRadius:'10px'}}>
+        <div style={{width:'600px',height:'380px',background:'white',display:'block',borderRadius:'10px'}}>
             <div style={{textAlign:'center'}}><h1>Iniciar sesion</h1></div>
             <div style={{background:'red',height:'1px'}}></div>
             <div style={{height:'30px'}}></div>
