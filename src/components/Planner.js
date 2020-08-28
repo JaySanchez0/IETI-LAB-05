@@ -27,9 +27,9 @@ import { Zoom } from '@material-ui/core';
 const drawerWidth = 240;
 const useStyles2 = makeStyles((theme) => ({
     div:{
-        height:'-moz-calc(100% - 50px)',
-        height:'-webkit-calc(100% - 50px)',
-        height:'calc(100% - 100px)',
+        height:'-moz-calc(100% - 150px)',
+        height:'-webkit-calc(100% - 150px)',
+        height:'calc(100% - 150px)',
         overflowY:'scroll',
     }
   }));
