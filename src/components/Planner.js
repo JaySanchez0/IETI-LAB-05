@@ -7,6 +7,7 @@ import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
+import {TextField} from '@material-ui/core';
 import {Redirect} from 'react-router-dom';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -19,10 +20,14 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import CloseIcon from '@material-ui/icons/Close';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import CardItem from './Card';
+import DialogContent from '@material-ui/core/DialogContent';
 import Fab from '@material-ui/core/Fab';
+import Dialog from '@material-ui/core/Dialog';
 import AddIcon from '@material-ui/icons/Add';
 import { Zoom } from '@material-ui/core';
+import Modal from './Modal';
 
 const drawerWidth = 240;
 const useStyles2 = makeStyles((theme) => ({
@@ -75,31 +80,8 @@ function Planner(props) {
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [closeSesion,setCloseSesion] = React.useState(false);
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
-  if(closeSesion) return <Redirect to="/logout"/>
-  const drawer = (
-    <div>
-      <div className={classes.toolbar} />
-      <Divider/>
-      <ListItem button>
-            <ListItemIcon><AccountCircleIcon style={{color:'blue'}}/></ListItemIcon>
-            <ListItemText primary={"Juan Diaz Palacios Ramirez"} />
-          </ListItem>
-      <Divider />
-      <List>
-      <ListItem button onClick={()=>setCloseSesion(true)}>
-            <ListItemIcon><CloseIcon style={{color:'red'}}/></ListItemIcon>
-            <ListItemText primary={"Cerrar sesion"} />
-          </ListItem>
-      </List>
-    </div>
-  );
-
-  const container = window !== undefined ? () => window().document.body : undefined;
-  const tasks = [{
+  const [openModal,setOpenModal] = React.useState(false);
+  const [tasks,setTasks] = React.useState([{
     "description": "Crear el front end",
     "responsible": {
         "name": "Santiago Carrillo",
@@ -123,7 +105,35 @@ function Planner(props) {
     },
     "status": "ready",
     "dueDate": 156464645646
-}];
+    }]);
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+  if(!localStorage.getItem("isLogged")) return <Redirect to="/"/>
+  if(closeSesion) return <Redirect to="/logout"/>;
+  const drawer = (
+    <div>
+      <div className={classes.toolbar} />
+      <Divider/>
+      <ListItem button>
+            <ListItemIcon><AccountCircleIcon style={{color:'blue'}}/></ListItemIcon>
+            <ListItemText primary={"Juan Diaz Palacios Ramirez"} />
+          </ListItem>
+      <Divider />
+      <List>
+      <ListItem button onClick={()=>setCloseSesion(true)}>
+            <ListItemIcon><CloseIcon style={{color:'red'}}/></ListItemIcon>
+            <ListItemText primary={"Cerrar sesion"} />
+          </ListItem>
+      </List>
+    </div>
+  );
+    const container = window !== undefined ? () => window().document.body : undefined;
+    const addTask = (task)=>{
+      tasks.push(task);
+      setTasks(tasks);
+      setOpenModal(false);
+    }
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -183,11 +193,12 @@ function Planner(props) {
                 date={data.dueDate}/>)}
                 </div>
             <div style={{width:'100%',height:'70px',textAlign:'right'}}>
-            <Fab color="secondary" aria-label="add">
+            <Fab color="secondary" aria-label="add" onClick={()=>setOpenModal(true)}>
                 <AddIcon />
             </Fab>
         </div>
       </main>
+    <Modal open={openModal} close={()=>setOpenModal(false)} addTask={(task)=>addTask(task)}></Modal>
     </div>
   );
 }

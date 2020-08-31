@@ -42,7 +42,7 @@ export default function CardItem(props) {
     <Card className={classes.card}>
       <CardContent>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
-          {props.status=='ready' && <CheckCircleOutlineIcon style={{color:'green'}}></CheckCircleOutlineIcon>}
+         <CheckCircleOutlineIcon style={{color:'green'}}></CheckCircleOutlineIcon> {props.status}
         </Typography>
         <Typography variant="h5" component="h2">
           {props.description}
@@ -60,6 +60,7 @@ export default function CardItem(props) {
       </CardActions>
     </Card>
     <div style={{width:'100%',height:'40px'}}></div>
+    
     </React.Fragment>
   );
 }
