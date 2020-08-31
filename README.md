@@ -20,6 +20,8 @@ Password: test
 
 [AWS](https://master.d3pqaslerllv9m.amplifyapp.com/)
 
+[Azure](https://jstoragejietilab3.z13.web.core.windows.net/)
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
