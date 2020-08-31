@@ -1,3 +1,26 @@
+### Laboratorio 3 ieti
+
+Presentado por: Jeisson Geovanny Sanchez Ramos
+
+
+### Datos 
+
+Usuario: jay@mail.com
+
+Password: test
+
+### Link enunciado de lab
+
+[ver](https://github.com/ieti-eci/1.3-react-js-task-planner-part1)
+
+### Link's de Despliegue
+
+[heroku](https://secret-anchorage-87569.herokuapp.com/)
+
+
+[AWS](https://master.d3pqaslerllv9m.amplifyapp.com/)
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
