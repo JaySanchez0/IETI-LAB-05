@@ -18,7 +18,9 @@ function App() {
             component={Planner} exact></Route>
 
         <Route path="/logout" render={()=>{
+          var users = localStorage.getItem("users");
           localStorage.clear();
+          localStorage.setItem("users",users);
           return <Redirect to="/"></Redirect>;
         }} exact />
     </BrowserRouter>

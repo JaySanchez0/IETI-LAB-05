@@ -7,7 +7,7 @@ import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import {TextField} from '@material-ui/core';
+import {TextField, Select, Button} from '@material-ui/core';
 import {Redirect} from 'react-router-dom';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -81,30 +81,34 @@ function Planner(props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [closeSesion,setCloseSesion] = React.useState(false);
   const [openModal,setOpenModal] = React.useState(false);
+  const [filter,setFilter] = React.useState("Ready");
+  const [nameFilter,setNameFilter] = React.useState("");
+  const [dateFilter,setDateFilter] = React.useState("");
+  const [applyFilter,setApplayFilter] = React.useState(false);
   const [tasks,setTasks] = React.useState([{
     "description": "Crear el front end",
     "responsible": {
         "name": "Santiago Carrillo",
         "email": "sancarbar@gmail.com"
     },
-    "status": "ready",
-    "dueDate": new Date(1995,11,17).toString()
+    "status": "Ready",
+    "dueDate": "2020-05-12"
 },{
     "description": "Crear Back end",
     "responsible": {
         "name": "Santiago Carrillo",
         "email": "sancarbar@gmail.com"
     },
-    "status": "ready",
-    "dueDate": 156464645646
+    "status": "Ready",
+    "dueDate": "2020-06-12"
 },{
     "description": "Corregir Fallos",
     "responsible": {
         "name": "Santiago Carrillo",
         "email": "sancarbar@gmail.com"
     },
-    "status": "ready",
-    "dueDate": 156464645646
+    "status": "Ready",
+    "dueDate": "2020-07-12"
     }]);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -154,7 +158,6 @@ function Planner(props) {
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Hidden smUp implementation="css">
           <Drawer
             container={container}
@@ -166,7 +169,7 @@ function Planner(props) {
               paper: classes.drawerPaper,
             }}
             ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
+              keepMounted: true, 
             }}
           >
             {drawer}
@@ -187,10 +190,20 @@ function Planner(props) {
       <main className={classes.content}>
         <div className={classes.toolbar} />
             <div className={classes2.div}>
-            {tasks.map((data)=><CardItem status={data.status}
+              Email: <TextField type="text" value={nameFilter} onChange={(e)=>setNameFilter(e.target.value)}></TextField>
+              Status: <Select value={filter} onChange={(e)=> setFilter(e.target.value)}>
+                <option value="Ready">Ready</option>
+                <option value="In progress">In progress</option>
+                <option value="Done">Done</option>
+              </Select>
+              Date: <TextField type="date" onChange={(e)=>setDateFilter(e.target.value)}></TextField>
+              <Button onClick={(e)=> setApplayFilter(!applyFilter)}>{!applyFilter && "Apply Filter"}{applyFilter && "Disable filters"}</Button>
+              <br></br><br/>
+              {!applyFilter && tasks.map((data)=><CardItem status={data.status}
                 people = {data.responsible.email}
                 description={data.description}
                 date={data.dueDate}/>)}
+                {applyFilter && showFilter(nameFilter,filter,dateFilter,tasks)}
                 </div>
             <div style={{width:'100%',height:'70px',textAlign:'right'}}>
             <Fab color="secondary" aria-label="add" onClick={()=>setOpenModal(true)}>
@@ -206,5 +219,21 @@ function Planner(props) {
 Planner.propTypes = {
   window: PropTypes.func,
 };
+
+
+function showFilter(email,status,date,data){
+  var li =[];
+    data.forEach((item)=>{
+      console.log(item);
+      if(item.responsible.email==email || item.responsible.status==status || item.dueDate==date){
+        li.push(<CardItem status={item.status}
+        people = {item.responsible.email}
+        description={item.description}
+        date={item.dueDate}/>);
+      }
+    });
+    return li;
+}
+
 
 export default Planner;

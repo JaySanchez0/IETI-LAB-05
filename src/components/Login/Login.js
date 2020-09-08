@@ -19,7 +19,9 @@ export default function Login(props){
     const [pw,setPW] = useState("");
     const [reg,setReg] = useState(false);
     const [correct,setCorrect] = useState(true);
-    localStorage.setItem("users",JSON.stringify([{"email":"jay@mail.com",pw:"test"}]));
+    if(localStorage.getItem("users")==null){
+        localStorage.setItem("users",JSON.stringify([{"email":"jay@mail.com",pw:"test"}]));
+    }
     if(localStorage.getItem("isLogged")){
         return <Redirect to="/planer"></Redirect>;
     }
