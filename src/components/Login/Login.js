@@ -11,7 +11,9 @@ function start(user,password,setCorrect){
     var exist = false;
     console.log(localStorage.getItem("users"));
     JSON.parse(localStorage.getItem("users")).forEach((pair)=>exist = exist || (user==pair.email && password==pair.pw));
-    if(exist) localStorage.setItem("isLogged",true);
+    if(exist){
+         localStorage.setItem("isLogged",true);
+    }
     setCorrect(false);
 }
 export default function Login(props){

@@ -1,4 +1,13 @@
 {
+  "name": "Task Planner",
+  "short_name": "Taks Planner",
+  "theme_color": "orange",
+  "background_color": "orange",
+  "display": "browser",
+  "scope": "/",
+  "start_url": "/"
+}
+{
   "short_name": "React App",
   "name": "Create React App Sample",
   "icons": [
