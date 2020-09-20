@@ -22,7 +22,7 @@ Presentado por: Jeisson Geovanny Sanchez Ramos
 
 El sitio web no lo permitio
 
-![img](IMG/GEN IMG.PNG)
+![img](https://github.com/JaySanchez0/IETI-LAB-05/blob/master/IMG/GEN%20IMG.PNG)
 
 ### Datos 
 
